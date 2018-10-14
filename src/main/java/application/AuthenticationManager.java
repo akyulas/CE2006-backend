@@ -94,6 +94,7 @@ public class AuthenticationManager {
                 returnMessage = "Log in information is false";
             }
 
+            rs.close();
             conn.close();
 
             return returnMessage;
