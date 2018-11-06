@@ -29,5 +29,7 @@ dependencies {
     compile("org.springframework.boot:spring-boot-starter-web")
     testCompile('org.springframework.boot:spring-boot-starter-test')
     testCompile('com.jayway.jsonpath:json-path')
+    compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.0'
+
 }
 
