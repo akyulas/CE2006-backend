@@ -55,6 +55,29 @@ public class PasswordRecoveryManager {
         return "Failed";
     }
 
+    @RequestMapping(value = "/getEmail/{matricID}", method = RequestMethod.GET)
+    public String returnEmail(@PathVariable String matricID) {
+        try {
+            Constants constants = new Constants();
+            String databaseURI = constants.databaseURI;
+            String databaseUser = constants.databaseUser;
+            String databasePassword = constants.password;
+
+            DriverManager.registerDriver(new Driver());
+            Connection conn = DriverManager.getConnection(databaseURI, databaseUser, databasePassword);
+            Statement st = conn.createStatement();
+
+            String query = "SELECT email FROM users WHERE matricid='" + matricID + "'";
+            ResultSet rs = st.executeQuery(query);
+
+            rs.next();
+            return rs.getString(1);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "Failed";
+    }
+
     @RequestMapping(path = "/password/{email}/{password}", method = RequestMethod.GET)
     public String changePassword(@PathVariable String password, @PathVariable String email) {
         try {
